@@ -24,11 +24,20 @@ function validateEmail(email){
   return regEx.test(email);
 }
 
+function validateCat(){
+  let validate = false;
+  Object.keys(catergories).forEach(function(key) {
+    if(catergories[key].selected) validate = true;
+  });
+  return validate;
+}
+
 function submit(){
   firstname = document.querySelector('.firstname').value;
   lastname = document.querySelector('.lastname').value;
   email = document.querySelector('.email').value;
-  console.log(firstname, lastname, validateEmail(email), checkBox);
+  console.log(firstname, lastname, validateEmail(email), checkBox, validateCat());
+  if(validateCat() && firstname && lastname && validateEmail(email) && checkBox) console.log('ok');
 }
 
 function toggleCheckBox(){
