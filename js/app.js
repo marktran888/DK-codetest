@@ -14,9 +14,6 @@ const catergories = {
 };
 
 let showForm = false;
-let firstname;
-let lastname;
-let email;
 let checkBox = false;
 
 function validateEmail(email){
@@ -33,10 +30,19 @@ function validateCat(){
 }
 
 function submit(){
-  firstname = document.querySelector('.firstname').value;
-  lastname = document.querySelector('.lastname').value;
-  email = document.querySelector('.email').value;
-  console.log(firstname, lastname, validateEmail(email), checkBox, validateCat());
+  const firstname = document.querySelector('.firstname').value;
+  const lastname = document.querySelector('.lastname').value;
+  const email = document.querySelector('.email').value;
+  const warningValidateCat = document.querySelector('.warningValidateCat');
+  const warningValidateFirstName = document.querySelector('.warningValidateFirstName');
+  const warningValidateLastName = document.querySelector('.warningValidateLastName');
+  const warningValidateEmail = document.querySelector('.warningValidateEmail');
+  const warningValidateConfirm = document.querySelector('.warningValidateConfirm');
+  warningValidateCat.innerHTML = !validateCat() ? 'Please select at least one catergory above': '';
+  warningValidateFirstName.innerHTML = !firstname ? 'Please enter your first name': '';
+  warningValidateLastName.innerHTML = !lastname ? 'Please enter your last name': '';
+  warningValidateEmail.innerHTML = !validateEmail(email) ? 'Please enter your email address': '';
+  warningValidateConfirm.innerHTML = !checkBox ? 'Please agree to the privacy policy and minimum age ': '';
   if(validateCat() && firstname && lastname && validateEmail(email) && checkBox) console.log('ok');
 }
 
@@ -48,14 +54,19 @@ function checkShowForm(){
   if(!showForm){
     const formDiv = document.querySelector('.form');
     formDiv.innerHTML = `
+      <p class="warningValidateCat"></p>
       <p>Join out newsletter so we can send you book recommendations</p>
       <form>
         <input type="text" class="firstname" name="firstname" placeholder="First name *"><br>
+        <p class="warningValidateFirstName"></p>
         <input type="text" class="lastname" name="lastname" placeholder="Last name *"><br>
+          <p class="warningValidateLastName"></p>
         <input type="text" class="email" name="email" placeholder="Your email address *"><br>
+          <p class="warningValidateEmail"></p>
       </form>
       <input type="submit" onclick="submit()">
       <p><input type="checkbox" class="checkBox" onchange="toggleCheckBox()"> I agree to the Privacy Policy and I am over 16 years of age</p>
+      <p class="warningValidateConfirm"></p>
     `;
     showForm = true;
   }
