@@ -15,18 +15,34 @@ const catergories = {
 
 let showForm = false;
 
+let firstname;
+let lastname;
+let email;
+let checkBox = false;
+
+function submit(){
+  firstname = document.querySelector('.firstname').value;
+  lastname = document.querySelector('.lastname').value;
+  email = document.querySelector('.email').value;
+  console.log(firstname, lastname, email, checkBox);
+}
+
+function toggleCheckBox(){
+  checkBox = !checkBox;
+}
+
 function checkShowForm(){
   if(!showForm){
     const formDiv = document.querySelector('.form');
     formDiv.innerHTML = `
       <p>Join out newsletter so we can send you book recommendations</p>
       <form>
-        <input type="text" name="firstname" placeholder="First name *"><br>
-        <input type="text" name="lastname" placeholder="Last name *"><br>
-        <input type="text" name="email" placeholder="Your email address *"><br>
+        <input type="text" class="firstname" name="firstname" placeholder="First name *"><br>
+        <input type="text" class="lastname" name="lastname" placeholder="Last name *"><br>
+        <input type="text" class="email" name="email" placeholder="Your email address *"><br>
       </form>
-      <input type="submit">
-      <p><input type="checkbox"> I agree to the Privacy Policy and I am over 16 years of age</p>   
+      <input type="submit" onclick="submit()">
+      <p><input type="checkbox" class="checkBox" onchange="toggleCheckBox()"> I agree to the Privacy Policy and I am over 16 years of age</p>
     `;
     showForm = true;
   }
