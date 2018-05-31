@@ -14,17 +14,21 @@ const catergories = {
 };
 
 let showForm = false;
-
 let firstname;
 let lastname;
 let email;
 let checkBox = false;
 
+function validateEmail(email){
+  var regEx = /\S+@\S+\.\S+/;
+  return regEx.test(email);
+}
+
 function submit(){
   firstname = document.querySelector('.firstname').value;
   lastname = document.querySelector('.lastname').value;
   email = document.querySelector('.email').value;
-  console.log(firstname, lastname, email, checkBox);
+  console.log(firstname, lastname, validateEmail(email), checkBox);
 }
 
 function toggleCheckBox(){
