@@ -1,4 +1,4 @@
-const catergories = {
+const categories = {
   chidrens: {label: 'Children\'s', selected: false},
   crafts: {label: 'Crafts & Hobbies', selected: false},
   education: {label: 'Education & Teachers', selected: false},
@@ -18,8 +18,8 @@ let checkBox = false;
 
 function validateCat(){
   let validate = false;
-  Object.keys(catergories).forEach(function(key) {
-    if(catergories[key].selected) validate = true;
+  Object.keys(categories).forEach(function(key) {
+    if(categories[key].selected) validate = true;
   });
   return validate;
 }
@@ -42,7 +42,7 @@ function submit(){
   const warningValidateLastName = document.querySelector('.warningValidateLastName');
   const warningValidateEmail = document.querySelector('.warningValidateEmail');
   const warningValidateConfirm = document.querySelector('.warningValidateConfirm');
-  warningValidateCat.innerHTML = !validateCat() ? 'Please select at least one catergory above': '';
+  warningValidateCat.innerHTML = !validateCat() ? 'Please select at least one category above': '';
   warningValidateFirstName.innerHTML = !firstname ? 'Please enter your first name': '';
   warningValidateLastName.innerHTML = !lastname ? 'Please enter your last name': '';
   warningValidateEmail.innerHTML = !validateEmail(email) ? 'Please enter your email address': '';
@@ -55,7 +55,7 @@ function checkShowForm(){
     const formDiv = document.querySelector('.form');
     formDiv.innerHTML = `
       <p class="warningValidateCat warning"></p>
-      <p>Join out newsletter so we can send you book recommendations</p>
+      <p>Join our newsletter so we can send you book recommendations</p>
       <form>
         <input type="text" class="firstname" name="firstname" placeholder="First name *"><br>
         <p class="warningValidateFirstName warning"></p>
@@ -74,17 +74,17 @@ function checkShowForm(){
 
 function init() {
   //create buttons for all catergories
-  const catergoriesDiv = document.querySelector('.catergories');
-  Object.keys(catergories).forEach(function(key) {
-    catergoriesDiv.innerHTML += '<button class="catergory ' + key + '"><input class="checkBox" type="checkbox">' + catergories[key].label + '</button>';
+  const categoriesDiv = document.querySelector('.catergories');
+  Object.keys(categories).forEach(function(key) {
+    categoriesDiv.innerHTML += '<button class="category ' + key + '"><input class="checkBox" type="checkbox">' + categories[key].label + '</button>';
   });
 
   //create click event listners for all buttons
-  Object.keys(catergories).forEach(function(key) {
+  Object.keys(categories).forEach(function(key) {
     document.querySelector('.'+key).addEventListener('change', ()=>{
-      catergories[key].selected = !catergories[key].selected;
+      categories[key].selected = !categories[key].selected;
       checkShowForm();
-      console.log('cat: ', key,',', 'selected: ', catergories[key].selected);
+      console.log('cat: ', key,',', 'selected: ', categories[key].selected);
     });
   });
 }
