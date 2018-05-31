@@ -13,6 +13,25 @@ const catergories = {
   travel: {label: 'Travel', selected: false}
 };
 
+let showForm = false;
+
+function checkShowForm(){
+  if(!showForm){
+    const formDiv = document.querySelector('.form');
+    formDiv.innerHTML = `
+      <p>Join out newsletter so we can send you book recommendations</p>
+      <form>
+        <input type="text" name="firstname" placeholder="First name *"><br>
+        <input type="text" name="lastname" placeholder="Last name *"><br>
+        <input type="text" name="email" placeholder="Your email address *"><br>
+      </form>
+      <input type="submit">
+      <p><input type="checkbox"> I agree to the Privacy Policy and I am over 16 years of age</p>   
+    `;
+    showForm = true;
+  }
+}
+
 function init() {
   //create buttons for all catergories
   const catergoriesDiv = document.querySelector('.catergories');
@@ -24,6 +43,7 @@ function init() {
   Object.keys(catergories).forEach(function(key) {
     document.querySelector('.'+key).addEventListener('change', ()=>{
       catergories[key].selected = !catergories[key].selected;
+      checkShowForm();
       console.log('cat: ', key,',', 'selected: ', catergories[key].selected);
     });
   });
