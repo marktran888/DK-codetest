@@ -16,17 +16,21 @@ const catergories = {
 let showForm = false;
 let checkBox = false;
 
-function validateEmail(email){
-  var regEx = /\S+@\S+\.\S+/;
-  return regEx.test(email);
-}
-
 function validateCat(){
   let validate = false;
   Object.keys(catergories).forEach(function(key) {
     if(catergories[key].selected) validate = true;
   });
   return validate;
+}
+
+function validateEmail(email){
+  var regEx = /\S+@\S+\.\S+/;
+  return regEx.test(email);
+}
+
+function toggleCheckBox(){
+  checkBox = !checkBox;
 }
 
 function submit(){
@@ -43,30 +47,26 @@ function submit(){
   warningValidateLastName.innerHTML = !lastname ? 'Please enter your last name': '';
   warningValidateEmail.innerHTML = !validateEmail(email) ? 'Please enter your email address': '';
   warningValidateConfirm.innerHTML = !checkBox ? 'Please agree to the privacy policy and minimum age ': '';
-  if(validateCat() && firstname && lastname && validateEmail(email) && checkBox) console.log('ok');
-}
-
-function toggleCheckBox(){
-  checkBox = !checkBox;
+  if(validateCat() && firstname && lastname && validateEmail(email) && checkBox) console.log('THANK YOU');
 }
 
 function checkShowForm(){
   if(!showForm){
     const formDiv = document.querySelector('.form');
     formDiv.innerHTML = `
-      <p class="warningValidateCat"></p>
+      <p class="warningValidateCat warning"></p>
       <p>Join out newsletter so we can send you book recommendations</p>
       <form>
         <input type="text" class="firstname" name="firstname" placeholder="First name *"><br>
-        <p class="warningValidateFirstName"></p>
+        <p class="warningValidateFirstName warning"></p>
         <input type="text" class="lastname" name="lastname" placeholder="Last name *"><br>
-          <p class="warningValidateLastName"></p>
+          <p class="warningValidateLastName warning"></p>
         <input type="text" class="email" name="email" placeholder="Your email address *"><br>
-          <p class="warningValidateEmail"></p>
+          <p class="warningValidateEmail warning"></p>
       </form>
       <input type="submit" onclick="submit()">
-      <p><input type="checkbox" class="checkBox" onchange="toggleCheckBox()"> I agree to the Privacy Policy and I am over 16 years of age</p>
-      <p class="warningValidateConfirm"></p>
+      <p><input type="checkbox" class="checkBox" onchange="toggleCheckBox()"> I agree to the <u>Privacy Policy</u> and I am over 16 years of age</p>
+      <p class="warningValidateConfirm warning"></p>
     `;
     showForm = true;
   }
@@ -76,7 +76,7 @@ function init() {
   //create buttons for all catergories
   const catergoriesDiv = document.querySelector('.catergories');
   Object.keys(catergories).forEach(function(key) {
-    catergoriesDiv.innerHTML += '<button class="' + key + '"><input class="checkBox" type="checkbox">' + catergories[key].label + '</button>';
+    catergoriesDiv.innerHTML += '<button class="catergory ' + key + '"><input class="checkBox" type="checkbox">' + catergories[key].label + '</button>';
   });
 
   //create click event listners for all buttons
@@ -87,7 +87,6 @@ function init() {
       console.log('cat: ', key,',', 'selected: ', catergories[key].selected);
     });
   });
-
 }
 
 window.addEventListener('DOMContentLoaded', init);
