@@ -31,26 +31,37 @@ main {
   color: red;
 }
 
-.successwhite {
-  color: white;
-  font-size: 50px;
-  margin: 0 auto;
-}
-
-.successblack {
-  margin: 20px auto;
-}
-
-.green {
-  background-color: #C5CF65;
-}
-
 .category, .forminput {
   width: 30%;
   height: 60px;
   background-color: rgba(255, 255, 255, 1);
   margin: 5px;
   padding: 10px;
+  text-align: left;
+  font-family: helvetica;
+}
+
+img {
+  float: right;
+}
+
+.successwhite {
+  color: white;
+  font-size: 50px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.successblack {
+  margin: 20px auto;
+}
+
+.imgsuccess {
+  float: left;
+}
+
+.green {
+  background-color: #C5CF65;
 }
 
 .submit {
