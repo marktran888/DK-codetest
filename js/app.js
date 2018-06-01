@@ -14,8 +14,11 @@ const categories = {
 };
 
 let showForm = false;
-let checkBox = false;
+let checkBox = false; //boolean to indicate terms conditions agreed
+let categoriesDiv; //HTML div wrapping around category buttons
+let formDiv; //HTML div wrapping around the form
 
+//checks at lease one catergory is selected
 function validateCat(){
   let validate = false;
   Object.keys(categories).forEach(function(key) {
@@ -24,15 +27,31 @@ function validateCat(){
   return validate;
 }
 
+//checks email is in the form string @ string . string
 function validateEmail(email){
   var regEx = /\S+@\S+\.\S+/;
   return regEx.test(email);
 }
 
+//toggles the terms and conditions selected
 function toggleCheckBox(){
   checkBox = !checkBox;
 }
 
+//removes title, categories and form then adds thank you screen
+function showThankYou(){
+  categoriesDiv.innerHTML = '';
+  formDiv.innerHTML = '';
+  document.querySelector('.title').innerHTML = '';
+  document.querySelector('.subtitle').innerHTML = '';
+  document.querySelector('body').classList.add('green');
+  document.querySelector('.thanks').innerHTML = `
+  <p class="title successwhite">Success!<p>
+  <p class="title successblack">Thank you for signing up to our newsletter<p>
+  `;
+}
+
+// check validation and show warning signs
 function submit(){
   const firstname = document.querySelector('.firstname').value;
   const lastname = document.querySelector('.lastname').value;
@@ -47,24 +66,24 @@ function submit(){
   warningValidateLastName.innerHTML = !lastname ? 'Please enter your last name': '';
   warningValidateEmail.innerHTML = !validateEmail(email) ? 'Please enter your email address': '';
   warningValidateConfirm.innerHTML = !checkBox ? 'Please agree to the privacy policy and minimum age ': '';
-  if(validateCat() && firstname && lastname && validateEmail(email) && checkBox) console.log('THANK YOU');
+  if(validateCat() && firstname && lastname && validateEmail(email) && checkBox) showThankYou();
 }
 
 function checkShowForm(){
   if(!showForm){
-    const formDiv = document.querySelector('.form');
+    formDiv = document.querySelector('.form');
     formDiv.innerHTML = `
       <p class="warningValidateCat warning"></p>
       <p>Join our newsletter so we can send you book recommendations</p>
       <form>
-        <input type="text" class="firstname" name="firstname" placeholder="First name *"><br>
+        <input type="text" class="firstname forminput" name="firstname" placeholder="First name *"><br>
         <p class="warningValidateFirstName warning"></p>
-        <input type="text" class="lastname" name="lastname" placeholder="Last name *"><br>
+        <input type="text" class="lastname forminput" name="lastname" placeholder="Last name *"><br>
           <p class="warningValidateLastName warning"></p>
-        <input type="text" class="email" name="email" placeholder="Your email address *"><br>
+        <input type="text" class="email forminput" name="email" placeholder="Your email address *"><br>
           <p class="warningValidateEmail warning"></p>
       </form>
-      <input type="submit" onclick="submit()">
+      <input type="submit" class="submit" onclick="submit()">
       <p><input type="checkbox" class="checkBox" onchange="toggleCheckBox()"> I agree to the <u>Privacy Policy</u> and I am over 16 years of age</p>
       <p class="warningValidateConfirm warning"></p>
     `;
@@ -74,7 +93,7 @@ function checkShowForm(){
 
 function init() {
   //create buttons for all catergories
-  const categoriesDiv = document.querySelector('.catergories');
+  categoriesDiv = document.querySelector('.categories');
   Object.keys(categories).forEach(function(key) {
     categoriesDiv.innerHTML += '<button class="category ' + key + '"><input class="checkBox" type="checkbox">' + categories[key].label + '</button>';
   });
@@ -84,7 +103,6 @@ function init() {
     document.querySelector('.'+key).addEventListener('change', ()=>{
       categories[key].selected = !categories[key].selected;
       checkShowForm();
-      console.log('cat: ', key,',', 'selected: ', categories[key].selected);
     });
   });
 }

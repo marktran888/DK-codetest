@@ -31,12 +31,32 @@ main {
   color: red;
 }
 
-.category {
+.successwhite {
+  color: white;
+  font-size: 50px;
+  margin: 0 auto;
+}
+
+.successblack {
+  margin: 20px auto;
+}
+
+.green {
+  background-color: #C5CF65;
+}
+
+.category, .forminput {
   width: 30%;
   height: 60px;
   background-color: rgba(255, 255, 255, 1);
-  margin: 10px;
+  margin: 5px;
   padding: 10px;
+}
+
+.submit {
+  width: 20%;
+  height: 50px;
+  background-color: red;
 }
 
 @media screen and (max-width: 768px) {
