@@ -1,16 +1,16 @@
 const categories = {
-  chidrens: {label: 'Children\'s', selected: false},
-  crafts: {label: 'Crafts & Hobbies', selected: false},
-  education: {label: 'Education & Teachers', selected: false},
-  food: {label: 'Food & Drink', selected: false},
-  garden: {label: 'Gardening', selected: false},
-  health: {label: 'Health & Fitness', selected: false},
-  history: {label: 'History & Reference', selected: false},
-  lego: {label: 'Lego&reg; Books', selected: false},
-  marvel: {label: 'Marvel', selected: false},
-  pregnancy: {label: 'Pregnancy & Parenting', selected: false},
-  star: {label: 'Star Wars&trade;', selected: false},
-  travel: {label: 'Travel', selected: false}
+  chidrens: {label: 'Children\'s', selected: false, pic: 2, alt: 'toy train'},
+  crafts: {label: 'Crafts & Hobbies', selected: false, pic: 9, alt: 'buttons'},
+  education: {label: 'Education & Teachers', selected: false, pic: 7, alt: 'atom'},
+  food: {label: 'Food & Drink', selected: false, pic: 12, alt: 'strawberry'},
+  garden: {label: 'Gardening', selected: false, pic: 11, alt: 'watering can'},
+  health: {label: 'Health & Fitness', selected: false, pic: 6, alt: 'olive oil'},
+  history: {label: 'History & Reference', selected: false, pic: 3, alt: 'old toy'},
+  lego: {label: 'Lego&reg; Books', selected: false, pic: 8, alt: 'lego logo'},
+  marvel: {label: 'Marvel', selected: false, pic: 10, alt: 'marvel logo'},
+  pregnancy: {label: 'Pregnancy & Parenting', selected: false, pic: 4, alt: 'baby'},
+  star: {label: 'Star Wars&trade;', selected: false, pic: 5, alt: 'star wars logo'},
+  travel: {label: 'Travel', selected: false, pic: 13, alt: 'dinosaur'}
 };
 
 let showForm = false;
@@ -48,6 +48,7 @@ function showThankYou(){
   document.querySelector('.thanks').innerHTML = `
   <p class="title successwhite">Success!<p>
   <p class="title successblack">Thank you for signing up to our newsletter<p>
+  <img src="/images/bitmap.jpg" alt="butterfly">
   `;
 }
 
@@ -95,7 +96,7 @@ function init() {
   //create buttons for all catergories
   categoriesDiv = document.querySelector('.categories');
   Object.keys(categories).forEach(function(key) {
-    categoriesDiv.innerHTML += '<button class="category ' + key + '"><input class="checkBox" type="checkbox">' + categories[key].label + '</button>';
+    categoriesDiv.innerHTML += '<button class="category ' + key + '"><input class="checkBox" type="checkbox">' + categories[key].label + '<img src="/images/bitmap-copy-' + categories[key].pic + '.jpg" alt="' + categories[key].alt +'"></button>';
   });
 
   //create click event listners for all buttons
