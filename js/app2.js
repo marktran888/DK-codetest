@@ -46,7 +46,7 @@ function showThankYou(){
   document.querySelector('.subtitle').innerHTML = '';
   document.querySelector('body').classList.add('green');
   document.querySelector('.thanks').innerHTML = `
-  <img src="/images/bitmap.jpg" class="imgsuccess" alt="butterfly">
+  <img src="images/bitmap.jpg" class="imgsuccess" alt="butterfly">
   <p class="title successwhite">Success!<p>
   <p class="title successblack">Thank you for signing up to our newsletter<p>
   `;
